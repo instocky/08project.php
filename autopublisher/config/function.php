@@ -26,14 +26,12 @@ function queryDate0($key)
 function distrArticleDate($array =0, $startdate = 0, $finishdate = 0)
 {
   $interval = ($finishdate - $startdate) / (count($array)-1);
-  $array2[] = $startdate;
+  $array2 = [];
   foreach ($array as $key => $value) {
-    $startdate += $interval;
-    array_push($array2, (int)$startdate);
+    $startdate += $interval + rand(159, 8959); // добавить случайность в интервал
+    array_push($array2, (int)$startdate); // формируем массив timecode
   }
-
-  var_dump($array);
-  var_dump($array2);
-  // array_combine($array2, $array);
+  $timecode = array_combine($array2, $array); // замена ключей в начальном массиве на новый timecode
+  return $timecode;
 }
  ?>
